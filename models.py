@@ -6,16 +6,14 @@ from flask_sqlalchemy import SQLAlchemy
 import json
 from flask_migrate import Migrate
 
-database_name = "capstonedb"
-database_path = "postgresql://{}/{}".format('localhost:5432', database_name)
-
 db = SQLAlchemy()
 
 '''
 setup_db(app)
     binds a flask application and a SQLAlchemy service
 '''
-def setup_db(app):
+def setup_db(app, database_name="capstonedb"):
+    database_path = "postgresql://{}/{}".format('localhost:5432', database_name)
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
@@ -36,7 +34,6 @@ class Movie(db.Model):
   def __init__(self, title, release_date):
     self.title= title
     self.release_date = release_date
-
 
   def insert(self):
     db.session.add(self)
@@ -66,7 +63,6 @@ class Actors(db.Model):
   name = Column(String)
   age = Column(Integer)
   gender = Column(String)
-
 
   def __init__(self, name, age, gender):
     self.name = name

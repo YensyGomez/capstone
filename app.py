@@ -5,7 +5,7 @@ from flask import Flask, app, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from models import setup_db, Movie, Actors
-# from auth import AuthError, requires_auth
+from auth import AuthError, requires_auth
 
 DETAILS_PER_PAGE = 10
 
@@ -54,7 +54,8 @@ def create_app(test_config=None):
    
     #get all movies
     @app.route('/movies', methods=['GET'])
-    def get_movies():
+    @requires_auth('get:movies')
+    def get_movies(token):
         movies = Movie.query.order_by(Movie.title).all()
         current_movies = pagination(request, movies, 'movies')
 
@@ -70,7 +71,8 @@ def create_app(test_config=None):
     #get all Actors.
 
     @app.route('/actors', methods=['GET'])
-    def get_actors():
+    @requires_auth('get:actors')
+    def get_actors(token):
         actors = Actors.query.order_by(Actors.name).all()
         current_actors = pagination(request, actors, 'actors')
 
@@ -85,7 +87,8 @@ def create_app(test_config=None):
     
     #get a specific movie using id
     @app.route('/movies/<int:movie_id>', methods=['GET'])
-    def get_specific_movie(movie_id):
+    @requires_auth('get:movies')
+    def get_specific_movie(token, movie_id):
         specific_movie = Movie.query.filter_by(id=movie_id).one_or_none()
 
         if(specific_movie is None):
@@ -98,7 +101,8 @@ def create_app(test_config=None):
 
     # get a specific actor
     @app.route('/actors/<int:actor_id>', methods=['GET'])
-    def get_specific_actor(actor_id):
+    @requires_auth('get:actors')
+    def get_specific_actor(token, actor_id):
         specific_actor = Actors.query.filter_by(id=actor_id).one_or_none()
 
         if(specific_actor is None):
@@ -109,10 +113,10 @@ def create_app(test_config=None):
             'actor': specific_actor.format()
         }), 200
 
-
     # delete a movie
     @app.route('/movies/<int:movie_id>', methods=['DELETE'])
-    def delete_movies(movie_id):
+    @requires_auth('delete:movies')
+    def delete_movies(token, movie_id):
         try:
             movie = Movie.query.filter_by(id=movie_id).one_or_none()
 
@@ -136,7 +140,8 @@ def create_app(test_config=None):
 
     # delete an actor
     @app.route('/actors/<int:actor_id>', methods=['DELETE'])
-    def delete_actors(actor_id):
+    @requires_auth('delete:actors')
+    def delete_actors(token, actor_id):
         try:
             actor = Actors.query.filter_by(id=actor_id).one_or_none()
 
@@ -159,7 +164,8 @@ def create_app(test_config=None):
 
     # create a movie
     @app.route('/movies', methods=['POST'])
-    def create_movie():
+    @requires_auth('post:movies')
+    def create_movie(token):
         # getting the json body and splitting the elemtents
         body = request.get_json()
 
@@ -187,7 +193,8 @@ def create_app(test_config=None):
 
     # create an actor
     @app.route('/actors', methods=['POST'])
-    def create_actor():
+    @requires_auth('post:actors')
+    def create_actor(token):
         # getting the json body and splitting the elemtents
         body = request.get_json()
 
@@ -216,7 +223,8 @@ def create_app(test_config=None):
 
     # update a movie
     @app.route('/movies/<int:movie_id>', methods=['PATCH'])
-    def update_movie(movie_id):
+    @requires_auth('patch:movies')
+    def update_movie(token, movie_id):
         specific_movie = Movie.query.filter_by(id=movie_id).one_or_none()
 
         if(specific_movie is None):
@@ -243,7 +251,8 @@ def create_app(test_config=None):
     
         # update an actor
     @app.route('/actors/<int:actor_id>', methods=['PATCH'])
-    def update_actor(actor_id):
+    @requires_auth('patch:actors')
+    def update_actor(token, actor_id):
         specific_actor = Actors.query.filter_by(id=actor_id).one_or_none()
 
         if(specific_actor is None):
@@ -269,6 +278,14 @@ def create_app(test_config=None):
             'success': True,
             'actor': specific_actor.format()
         }), 200
+
+    @app.errorhandler(AuthError)
+    def authentication_error(error):
+        return jsonify({
+            'success': False,
+            'error': error.status_code,
+            'message': error.error['description']
+        }), error.status_code
 
     @app.errorhandler(400)
     def not_found(error):
