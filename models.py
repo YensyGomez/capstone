@@ -13,7 +13,8 @@ setup_db(app)
     binds a flask application and a SQLAlchemy service
 '''
 def setup_db(app, database_name="capstonedb"):
-    database_path = "postgresql://{}/{}".format('localhost:5432', database_name)
+    database_path ="postgres://syyecrbfpbipfe:7a3a96cc18215d074d58db31d4c037d71d0a21de8029a9cc979455e7eba3008d@ec2-3-211-37-117.compute-1.amazonaws.com:5432/db08i5uuf21l1v"
+    #database_path = "postgresql://{}/{}".format('localhost:5432', database_name)
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
