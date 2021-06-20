@@ -6,6 +6,7 @@ from models import db, Movie, Actors
 
 app = create_app()
 
+
 migrate = Migrate(app, db)
 manager = Manager(app)
 
