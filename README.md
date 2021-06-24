@@ -123,7 +123,89 @@ python test_app.py
 
 ```
 
-# Endpoints
+# Endpoins
+## GET '/movies'
+
+* First checks that the token provided is allowed to perform this operation. If authorized, then fetches a dictionary of movies.
+* Request Arguments: token
+* Returns: Each object in the movies dictionary and an object showing the total number of movies.
+```json
+{
+    "movies": [
+        {
+            "id": 5,
+            "release_date": "Tue, 30 Oct 2018 00:00:00 GMT",
+            "title": "Aguilas descalzas"
+        },
+        {
+            "id": 3,
+            "release_date": "Wed, 11 Nov 2015 00:00:00 GMT",
+            "title": "Amor indio"
+        },
+        {
+            "id": 4,
+            "release_date": "Thu, 12 Oct 1950 00:00:00 GMT",
+            "title": "Amor mio"
+        },
+        {
+            "id": 1,
+            "release_date": "Mon, 12 Nov 1990 00:00:00 GMT",
+            "title": "selena"
+        },
+        {
+            "id": 2,
+            "release_date": "Tue, 12 Oct 1999 00:00:00 GMT",
+            "title": "spawn"
+        }
+    ],
+    "success": true,
+    "total_movies": 5
+}
+
+```
+## Get Actors
+
+* First checks that the token provided is allowed to perform this operation. If authorized, then fetches a dictionary of actors.
+* Request Arguments: token
+* Returns: Each object in the actors dictionary and an object showing the total number of actors.
+```json
+{
+    "actors": [
+        {
+            "age": 36,
+            "gender": "Hombre",
+            "id": 2,
+            "name": "Gael Garcia"
+        },
+        {
+            "age": 50,
+            "gender": "Mujer",
+            "id": 3,
+            "name": "jennifer Lopez"
+        },
+        {
+            "age": 50,
+            "gender": "Hombre",
+            "id": 4,
+            "name": "John Leguisamo"
+        },
+        {
+            "age": 32,
+            "gender": "Hombre",
+            "id": 1,
+            "name": "Pedro Navajas"
+        },
+        {
+            "age": 41,
+            "gender": "Mujer",
+            "id": 5,
+            "name": "Rachel McAdams"
+        }
+    ],
+    "success": true,
+    "total_actors": 5
+} 
+```
 
 
 
