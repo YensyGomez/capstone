@@ -1,7 +1,7 @@
 # capstone
 The Casting Agency models a company that is responsible for creating movies and managing and assigning actors to those movies. You are an Executive Producer within the company and are creating a system to simplify and streamline your process.
 
-# URLs:
+# URLs Heroku app:
 [heroku-agency-capstone]( https://heroku-agency-capstone.herokuapp.com/)
 
 [git-heroku-agency-capstone]( https://git.heroku.com/heroku-agency-capstone.git)
@@ -92,6 +92,31 @@ delete:movies: delete a movie
    * patch:movies	
    * post:actors
    * post:movies
+
+# Local Testing
+## Set up
+Create a testing database usg psql.
+
+```bash
+createdb captonedb_test
+```
+If the testing db was already created:
+
+```bash
+dropdb captonedb_test_test && createdb captonedb_test_test
+```
+Make sure the environment variables are set:
+
+```bash
+source setup.sh
+```
+Run the tests
+To test the local install, run the following command from the root folder.
+```bash
+python test_app.py
+```
+
+
 
 
 
