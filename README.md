@@ -12,7 +12,7 @@ The Casting Agency models a company that is responsible for creating movies and 
 https://yehegovi45.eu.auth0.com/authorize?audience=agency&response_type=token&client_id=wg6tV7kMjM7GpwiOdhHcwjlH27kqU11r&redirect_uri=https://heroku-agency-capstone.herokuapp.com
 ```
 # Rol account:
-## Asistente:
+## Assistant:
 
 email: [assistant@myagency.com](mailto:assistant@casting.com)
 
@@ -43,8 +43,6 @@ pip install -r requirements.txt
 ```
 # Running the local server 
 
-From within the directory first ensure you are working using your created virtual environment.
-
 To run the server, execute:
 
 ```bash
@@ -53,5 +51,49 @@ export FLASK_ENV=development
 flask run
 ```
 # Authentication:
+
+## Permissions: 
+get:actors: get actors
+post:actors: create a new actor
+patch:actors: modify an existing actor
+delete:actors: delete an actor
+get:movies: get movies
+post:movies: create a new movie
+patch:movies: modify an existing movie
+delete:movies: delete a movie
+
+## Roles Permissions:
+### Assistant:
+1.Casting Assistant
+ * Can view actors and movies.
+ * Has permissions:
+   * get:actors: get actors
+   * get:movies: get movies
+2. Casting Director
+ * All permissions a Casting Assistant has and…
+ * Add or delete an actor from the database
+ * Modify actors or movies
+ * Has permissions:
+   * delete:actors
+   * get:actors
+   * get:movies
+   * patch:actors
+   * patch:movies
+   * post:actors
+3. Executive Producer
+ * All permissions a Casting Director has and…
+ * Add or delete a movie from the database
+ * Has permissions:
+   * delete:actors
+   * delete:movies
+   * get:actors
+   * get:movies	
+   * patch:actors
+   * patch:movies	
+   * post:actors
+   * post:movies
+
+
+
 
 
