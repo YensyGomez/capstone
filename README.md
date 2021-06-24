@@ -302,7 +302,12 @@ python test_app.py
 }
 ```
 
-# Patch Movies:
+# Patch Actors:
+
+
+* First checks that the token provided is allowed to perform this operation. If authorized, then takes in an object with key value pairs for the desired fields to be changes.
+* Request Arguments: token, actor_id
+* Returns: An object containing the updated actor.
 ```json
 {
     "actor": {
@@ -315,6 +320,90 @@ python test_app.py
 }
 ```
 
+# Post Actors
+
+* First checks that the token provided is allowed to perform this operation. If authorized, then takes in an object with key value pairs for the new actor namely the name, age and gender.
+* Request Arguments: token
+* Returns: An object containing the newly created actors's id, each object in the list of modified actors and an object showing the total number of actors.
+```json
+{
+    "actors": [
+        {
+            "age": 36,
+            "gender": "Hombre",
+            "id": 2,
+            "name": "Gael Garcia"
+        },
+        {
+            "age": 50,
+            "gender": "Mujer",
+            "id": 3,
+            "name": "jennifer Lopez"
+        },
+        {
+            "age": 40,
+            "gender": "Hombre",
+            "id": 4,
+            "name": "John Leguisamo "
+        },
+        {
+            "age": 41,
+            "gender": "Mujer",
+            "id": 5,
+            "name": "Rachel McAdams"
+        },
+        {
+            "age": 34,
+            "gender": "Hombre",
+            "id": 6,
+            "name": "Jose Lopez "
+        }
+    ],
+    "created": 6,
+    "success": true,
+    "total_actors": 5
+}
+```
+
+# Post Movie
+
+* First checks that the token provided is allowed to perform this operation. If authorized, then takes in an object with key value pairs for the new movie namely the title and release_date.
+* Request Arguments: token
+* Returns: An object containing the newly created movie's id, each object in the list of modified movies and an object showing the total number of movies.
+```json
+{
+    "created": 6,
+    "movies": [
+        {
+            "id": 2,
+            "release_date": "Tue, 12 Oct 1999 00:00:00 GMT",
+            "title": "spawn"
+        },
+        {
+            "id": 3,
+            "release_date": "Wed, 11 Nov 2015 00:00:00 GMT",
+            "title": "Amor indio"
+        },
+        {
+            "id": 4,
+            "release_date": "Thu, 12 Oct 1950 00:00:00 GMT",
+            "title": "Amor mio"
+        },
+        {
+            "id": 5,
+            "release_date": "Tue, 30 Oct 2018 00:00:00 GMT",
+            "title": "Aguilas descalzas extreno 2 "
+        },
+        {
+            "id": 6,
+            "release_date": "Thu, 30 Oct 1986 00:00:00 GMT",
+            "title": "la vida es mia y solo mia "
+        }
+    ],
+    "success": true,
+    "total_movies": 5
+}
+```
 
 
 
