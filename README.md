@@ -302,6 +302,19 @@ python test_app.py
 }
 ```
 
+# Patch Movies:
+```json
+{
+    "actor": {
+        "age": 40,
+        "gender": "Hombre",
+        "id": 4,
+        "name": "John Leguisamo "
+    },
+    "success": true
+}
+```
+
 
 
 
