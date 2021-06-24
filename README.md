@@ -6,7 +6,7 @@ The Casting Agency models a company that is responsible for creating movies and 
 
 [git-heroku-agency-capstone]( https://git.heroku.com/heroku-agency-capstone.git)
 
-# Generate token: 
+# Generate token heroku: 
  
 ```bash
 https://yehegovi45.eu.auth0.com/authorize?audience=agency&response_type=token&client_id=wg6tV7kMjM7GpwiOdhHcwjlH27kqU11r&redirect_uri=https://heroku-agency-capstone.herokuapp.com
@@ -93,17 +93,23 @@ delete:movies: delete a movie
    * post:actors
    * post:movies
 
-# Local Testing
-## Set up
-Create a testing database usg psql.
+# Generate Local Token:
 
 ```bash
-createdb captonedb_test
+https://yehegovi45.eu.auth0.com/authorize?audience=agency&response_type=token&client_id=wg6tV7kMjM7GpwiOdhHcwjlH27kqU11r&redirect_uri=http://127.0.0.1:5000/movies
+```
+# Local Testing
+## Set up
+Create a testing database using psql.
+
+```bash
+createdb capstonedb_test
 ```
 If the testing db was already created:
 
 ```bash
-dropdb captonedb_test_test && createdb captonedb_test_test
+dropdb capstonedb_test && createdb capstonedb_test
+psql capstonedb_test < capstonedb.sql 
 ```
 Make sure the environment variables are set:
 
@@ -114,7 +120,12 @@ Run the tests
 To test the local install, run the following command from the root folder.
 ```bash
 python test_app.py
+
 ```
+
+# Endpoints
+
+
 
 
 
