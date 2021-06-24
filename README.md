@@ -207,6 +207,100 @@ python test_app.py
 } 
 ```
 
+# Delete Actors
+
+* First checks that the token provided is allowed to perform this operation. If authorized, then takes in a actor ID, if the actor exists, then it is deleted from the database
+* Request Arguments: token, actor_id
+* Returns: The ID of the deleted actor and each object in the list of modified actors and an object showing the total number of actors.
+```json
+{
+    "actors": [
+        {
+            "age": 36,
+            "gender": "Hombre",
+            "id": 2,
+            "name": "Gael Garcia"
+        },
+        {
+            "age": 50,
+            "gender": "Mujer",
+            "id": 3,
+            "name": "jennifer Lopez"
+        },
+        {
+            "age": 50,
+            "gender": "Hombre",
+            "id": 4,
+            "name": "John Leguisamo"
+        },
+        {
+            "age": 41,
+            "gender": "Mujer",
+            "id": 5,
+            "name": "Rachel McAdams"
+        }
+    ],
+    "deleted": 1,
+    "success": true,
+    "total_actors": 4
+}
+```
+
+
+# Delete Movies
+
+* First checks that the token provided is allowed to perform this operation. If authorized, then takes in a movie ID, if the movie exists, then it is deleted from the database
+* Request Arguments: token, movie_id
+* Returns: The ID of the deleted movie and each object in the list of modified movies and an object showing the total number of movies.
+
+```json
+{
+    "deleted": 1,
+    "movies": [
+        {
+            "id": 2,
+            "release_date": "Tue, 12 Oct 1999 00:00:00 GMT",
+            "title": "spawn"
+        },
+        {
+            "id": 3,
+            "release_date": "Wed, 11 Nov 2015 00:00:00 GMT",
+            "title": "Amor indio"
+        },
+        {
+            "id": 4,
+            "release_date": "Thu, 12 Oct 1950 00:00:00 GMT",
+            "title": "Amor mio"
+        },
+        {
+            "id": 5,
+            "release_date": "Tue, 30 Oct 2018 00:00:00 GMT",
+            "title": "Aguilas descalzas"
+        }
+    ],
+    "success": true,
+    "total_movies": 4
+}
+
+```
+
+# Patch Movie
+
+* First checks that the token provided is allowed to perform this operation. If authorized, then takes in an object with key value pairs for the desired fields to be changes.
+* Request Arguments: token, movie_id
+* Returns: An object containing the updated movie.
+
+```json
+
+{
+    "movie": {
+        "id": 5,
+        "release_date": "Tue, 30 Oct 2018 00:00:00 GMT",
+        "title": "Aguilas descalzas extreno 2 "
+    },
+    "success": true
+}
+```
 
 
 
